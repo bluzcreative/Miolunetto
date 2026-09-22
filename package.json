@@ -1,0 +1,7 @@
+{
+  "name": "lunetto-web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Web estática de Lunetto (HTML/CSS/JS) + una función serverless en api/cotizar.js para el formulario de catering.",
+  "engines": { "node": ">=18" }
+}

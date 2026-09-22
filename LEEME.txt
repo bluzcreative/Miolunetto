@@ -1,0 +1,24 @@
+LUNETTO — WEB (Vercel)
+Se sube a Vercel como proyecto (con la función api/cotizar.js), no solo como archivos estáticos sueltos.
+Dominio: apunta desde GoDaddy hacia Vercel (Vercel te da los registros DNS al agregar el dominio en el proyecto).
+
+Ver en tu computadora: python3 -m http.server 8765 muestra las páginas, PERO el botón "Enviar por correo"
+de Cotizar NO funciona así (esa función solo corre en Vercel, o con `vercel dev` si instalas Node + Vercel CLI).
+
+DESPLIEGUE EN VERCEL
+1. Sube esta carpeta (web/) como el proyecto — el archivo vercel detecta api/cotizar.js solo.
+2. En el proyecto, ve a Settings → Environment Variables y agrega:
+     RESEND_API_KEY = (la key de Resend, la misma que está en .env.local — NO subas ese archivo a git)
+3. El formulario de Cotizar → "Enviar por correo" envía directo a info@miolunetto.com. Ya probado y funcionando.
+4. El remitente que se ve en el correo es "Lunetto Web <onboarding@resend.dev>" (el dominio propio no está
+   verificado en Resend). Para que salga desde un correo con @miolunetto.com: en Resend → Domains, agrega
+   miolunetto.com, pon los registros DNS que te den en GoDaddy, y cuando quede verificado, cambia la
+   constante FROM en api/cotizar.js por algo como "Lunetto <cotizaciones@miolunetto.com>".
+
+Datos editables: tools/build.py (sección DATOS EDITABLES). Después correr:  python3 tools/build.py
+
+PENDIENTES
+- assets/menu-lunetto.pdf es hoy el Menú PDF. Reemplazar por el PDF de catering (mismo nombre de archivo).
+- Fuente Ala Champ: versión DEMO (sin números ni signos). Los títulos con números/signos usan Montserrat.
+- dubaiExtra (1.00): recargo por Chocolate Dubai en caja mixta, por confirmar.
+- .env.local tiene la API key de Resend para pruebas locales — no la compartas ni la subas a un repo público.
