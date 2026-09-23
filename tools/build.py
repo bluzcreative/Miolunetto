@@ -101,7 +101,10 @@ def head(title, desc, extra=""):
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:image" content="assets/img/croissants-2.jpg">
 <meta property="og:locale" content="es_VE">
-<link rel="icon" href="assets/img/logo-verde.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
