@@ -22,6 +22,7 @@ CONFIG = {
     "deliveryEstimate": 3,
     "dubaiExtra": 1.00,                  # recargo por cada Chocolate Dubai en caja mixta (por confirmar)
     "menuUrl": "menu.html",
+    "siteUrl": "https://www.miolunetto.com",  # ajusta si el dominio final es sin "www"
 }
 BOXES = {
     "c7": {4: 11, 8: 22, 16: 44},
@@ -507,6 +508,25 @@ def page_politicas():
     return h + footer()
 
 # ============ ESCRITURA ============
+def page_sitemap():
+    pages = [
+        ("", "weekly", "1.0"),
+        ("menu.html", "weekly", "0.9"),
+        ("catering.html", "monthly", "0.7"),
+        ("cotizar.html", "monthly", "0.7"),
+        ("catering-pdf.html", "monthly", "0.5"),
+        ("contacto.html", "monthly", "0.6"),
+        ("politicas.html", "yearly", "0.3"),
+    ]
+    today = __import__("datetime").date.today().isoformat()
+    base = CONFIG["siteUrl"].rstrip("/")
+    entries = "\n".join(
+        f'  <url><loc>{base}/{p}</loc><lastmod>{today}</lastmod><changefreq>{freq}</changefreq><priority>{pr}</priority></url>'
+        for p, freq, pr in pages
+    )
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{entries}\n</urlset>\n'
+
+
 def write(path, content):
     full = os.path.join(ROOT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
@@ -522,5 +542,6 @@ if __name__ == "__main__":
                      ("cotizar.html", page_cotizar), ("catering-pdf.html", page_pdf), ("contacto.html", page_contacto),
                      ("politicas.html", page_politicas)]:
         write(name, fn())
-    write("robots.txt", "User-agent: *\nAllow: /\n")
+    write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {CONFIG['siteUrl'].rstrip('/')}/sitemap.xml\n")
+    write("sitemap.xml", page_sitemap())
     print("OK")
