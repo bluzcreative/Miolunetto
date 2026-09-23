@@ -3,7 +3,7 @@
 // No usa librerías externas: llama a la API de Resend directamente con fetch.
 
 const TO = ['info@miolunetto.com'];
-const FROM = 'Lunetto Web <onboarding@resend.dev>'; // ver LEEME.txt sobre verificar el dominio en Resend
+const FROM = 'Lunetto <cotizaciones@notificaciones.miolunetto.com>'; // requiere que notificaciones.miolunetto.com esté verificado en Resend (ver LEEME.txt)
 
 function esc(s) {
   return String(s || '').replace(/[&<>"]/g, function (c) {
